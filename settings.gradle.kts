@@ -1,2 +1,2 @@
-rootProject.name = "instacode-university"
+rootProject.name = "automation-university"
 include("database")
