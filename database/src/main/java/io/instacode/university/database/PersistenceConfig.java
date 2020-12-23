@@ -1,48 +1,41 @@
 package io.instacode.university.database;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
-@EnableTransactionManagement
+import javax.sql.DataSource;
+
 @Configuration
-@EnableJpaRepositories(basePackages = "io.instacode.university.database")
+@PropertySource("application.properties")
 public class PersistenceConfig {
 
+    @Autowired
+    private Environment environment;
 
-//  @Bean(name="entityManagerFactory")
-//  public LocalSessionFactoryBean sessionFactory() {
-//    LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-//    sessionFactory.setDataSource(dataSource());
-//    sessionFactory.setPackagesToScan("io.instacode.university.database");
-//    sessionFactory.setHibernateProperties(hibernateProperties());
-//    return sessionFactory;
-//  }
-//
-//  private final Properties hibernateProperties() {
-//    Properties hibernateProperties = new Properties();
-//    hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-//    hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-//    hibernateProperties.setProperty("spring.jpa.show-sql", String.valueOf(true));
-//    hibernateProperties.setProperty("spring.jpa.generate-ddl", String.valueOf(true));
-//    return hibernateProperties;
-//  }
-//
-//  @Bean
-//  public DataSource dataSource() {
-//
-//    BasicDataSource dataSource = new BasicDataSource();
-//    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-//    dataSource.setUrl("jdbc:mysql://docker:33060/university_db?serverTimezone=CST&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true");
-//    dataSource.setUsername("root");
-//    dataSource.setPassword("password");
-//    return dataSource;
-//  }
-//
-//  @Bean
-//  public PlatformTransactionManager hibernateTransactionManager() {
-//    HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-//    transactionManager.setSessionFactory(sessionFactory().getObject());
-//    return transactionManager;
-//  }
+    @Bean
+    public LocalSessionFactoryBean entityManagerFactory() {
+        Resource config = new ClassPathResource("hibernate.cfg.xml");
+        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+        localSessionFactoryBean.setConfigLocation(config);
+        localSessionFactoryBean.setPackagesToScan(environment.getProperty("university.db.entity.package"));
+        localSessionFactoryBean.setDataSource(dataSource());
+        return localSessionFactoryBean;
+    }
+
+    @Bean
+    public DataSource dataSource() {
+        BasicDataSource dataSource = new BasicDataSource();
+        dataSource.setDriverClassName(environment.getProperty("university.db.driver"));
+        dataSource.setUrl(environment.getProperty("university.db.url"));
+        dataSource.setUsername(environment.getProperty("university.db.username"));
+        dataSource.setPassword(environment.getProperty("university.db.password"));
+        return dataSource;
+    }
 }
