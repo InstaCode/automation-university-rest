@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  database:
+    image: mysql:latest
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_PASSWORD=ThePassword
+      - MYSQL_DATABASE=university_db
+      - MYSQL_USER=springuser
+    networks:
+      - spring-boot-mysql-network
+    #volumes:
+      #- 'db-data:/var/lib/mysql'
+networks:
+  spring-boot-mysql-network:
+    driver: bridge
+volumes:
+  db-data: null
