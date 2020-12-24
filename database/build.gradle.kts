@@ -18,7 +18,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.4.1")
     implementation("org.apache.tomcat:tomcat-dbcp:9.0.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.4.1")
-    implementation("org.hibernate:hibernate-core:5.4.25.Final")
+    implementation("org.hibernate:hibernate-core:5.4.27.Final")
     //implementation("mysql:mysql-connector-java:8.0.22")
     implementation("com.h2database:h2:1.4.200")
     implementation ("com.github.javafaker:javafaker:1.0.2")
