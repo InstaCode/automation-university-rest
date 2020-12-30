@@ -14,5 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Setup Java JDK
+      uses: actions/setup-java@v1.4.3
+      with:  
+        java-version: 15
+    - name: Gradle Build
+      run: gradle assemble
     - name: Build the Docker image
       run: docker-compose build
