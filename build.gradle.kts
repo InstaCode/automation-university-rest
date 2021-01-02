@@ -5,8 +5,7 @@ allprojects {
 }
 
 subprojects {
-//    apply(plugin="java")
-//    apply(plugin="idea")
+
 }
 
 
