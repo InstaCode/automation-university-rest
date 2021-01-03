@@ -1,22 +1,13 @@
 plugins {
     idea
     java
+    jacoco
+    id("edu.umich.med.michr.h2-plugin") version "0.1.1-SNAPSHOT"
     id("org.springframework.boot") version "2.4.1"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     id("io.freefair.lombok") version "5.3.0"
     id("org.sonarqube") version "3.0"
-    jacoco
 }
-
-
-sonarqube {
-    properties {
-        property("sonar.projectKey", "InstaCode_automation-university")
-        property("sonar.organization", "instacode")
-        property("sonar.host.url", "https://sonarcloud.io")
-    }
-}
-
 
 repositories {
     mavenCentral()
@@ -33,13 +24,40 @@ dependencies {
     implementation("com.h2database:h2:1.4.200")
     implementation("com.github.javafaker:javafaker:1.0.2")
     implementation("org.springframework:spring-orm:5.3.2")
+    testImplementation ("org.assertj:assertj-db:2.0.2")
+    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.3.1")
 }
 
 tasks.test {
+    useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.isEnabled = true
+        csv.isEnabled = false
+        html.destination = file("${buildDir}/jacocoHtml")
+    }
+}
+
+h2{
+    tcpPassword="password"
+}
+
+jacoco {
+    reportsDir = file("$buildDir/jacoco")
+}
+
+
+sonarqube {
+    properties {
+        property("sonar.projectKey", "InstaCode_automation-university")
+        property("sonar.organization", "instacode")
+        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.coverage.jacoco.xmlReportPaths", "./database/build/jacoco/test/jacocoTestReport.xml")
+    }
 }
 
 
