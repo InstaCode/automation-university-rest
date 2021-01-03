@@ -38,16 +38,12 @@ tasks.jacocoTestReport {
     reports {
         xml.isEnabled = true
         csv.isEnabled = false
-        html.destination = file("${buildDir}/jacocoHtml")
+        //html.destination = file("${buildDir}/jacocoHtml")
     }
 }
 
 h2{
     tcpPassword="password"
-}
-
-jacoco {
-    reportsDir = file("$buildDir/jacoco")
 }
 
 
@@ -56,7 +52,8 @@ sonarqube {
         property("sonar.projectKey", "InstaCode_automation-university")
         property("sonar.organization", "instacode")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.coverage.jacoco.xmlReportPaths", "./database/build/jacoco/test/jacocoTestReport.xml")
+//        property("sonar.coverage.jacoco.xmlReportPaths", "./build/jacoco/test/jacocoTestReport.xml")
+        property("sonar.junit.reportPaths", "./build/test-results/test")
     }
 }
 
