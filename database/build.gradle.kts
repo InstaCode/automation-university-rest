@@ -37,12 +37,10 @@ tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
     reports {
         xml.isEnabled = true
-        csv.isEnabled = false
-        //html.destination = file("${buildDir}/jacocoHtml")
     }
 }
 
-h2{
+h2 {
     tcpPassword="password"
 }
 
@@ -52,7 +50,6 @@ sonarqube {
         property("sonar.projectKey", "InstaCode_automation-university")
         property("sonar.organization", "instacode")
         property("sonar.host.url", "https://sonarcloud.io")
-//        property("sonar.coverage.jacoco.xmlReportPaths", "./build/jacoco/test/jacocoTestReport.xml")
         property("sonar.junit.reportPaths", "./build/test-results/test")
     }
 }
