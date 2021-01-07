@@ -1,4 +1,4 @@
-package io.instacode.university.database;
+package io.instacode.university.configuration;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;

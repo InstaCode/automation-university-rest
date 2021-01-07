@@ -1,4 +1,4 @@
-package io.instacode.university.database;
+package io.instacode.university.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

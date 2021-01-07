@@ -1,6 +1,6 @@
-package io.instacode.university.database.catalogue;
+package io.instacode.university.catalogue;
 
-import io.instacode.university.database.BaseEntity;
+import io.instacode.university.models.BaseEntity;
 
 import javax.persistence.*;
 

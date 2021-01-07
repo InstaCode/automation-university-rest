@@ -1,4 +1,4 @@
-package io.instacode.university.database.catalogue;
+package io.instacode.university.catalogue;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

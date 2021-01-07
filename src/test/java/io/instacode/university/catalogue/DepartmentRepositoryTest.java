@@ -1,4 +1,4 @@
-package io.instacode.university.database.catalogue;
+package io.instacode.university.catalogue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

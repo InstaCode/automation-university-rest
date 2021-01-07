@@ -1,4 +1,4 @@
-package io.instacode.university.database.catalogue;
+package io.instacode.university.catalogue;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
