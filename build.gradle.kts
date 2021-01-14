@@ -34,7 +34,15 @@ dependencies {
     implementation("io.springfox:springfox-swagger2:3.0.0")
     implementation("io.springfox:springfox-swagger-ui:3.0.0")
     implementation("org.springframework.boot:spring-boot-starter-web:2.4.1")
-    implementation ("org.springframework.boot:spring-boot-starter:2.4.1")
+    implementation("org.springframework.boot:spring-boot-starter:2.4.1")
+    implementation("org.mapstruct.extensions.spring:mapstruct-spring-extensions:0.0.1")
+    implementation("org.mapstruct.extensions.spring:mapstruct-spring-annotations:0.0.1")
+    implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+    implementation ("org.mapstruct:mapstruct-processor:1.4.1.Final")
+    annotationProcessor ("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.mapstruct:mapstruct:1.4.1.Final")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:2.4.1")
+    implementation ("io.springfox:springfox-boot-starter:3.0.0")
 }
 
 tasks.test {

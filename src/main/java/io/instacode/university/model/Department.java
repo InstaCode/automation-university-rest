@@ -1,12 +1,14 @@
-package io.instacode.university.catalogue;
+package io.instacode.university.model;
 
-import io.instacode.university.models.BaseEntity;
+import io.swagger.annotations.ApiModel;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 
 @Entity
+@ApiModel
 public class Department extends BaseEntity {
-    
+
     @Column(unique = true, length = 4)
     private String departmentCode;
 
@@ -28,4 +30,11 @@ public class Department extends BaseEntity {
         this.departmentName = departmentName;
     }
 
+    /*public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }*/
 }

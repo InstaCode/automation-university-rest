@@ -2,6 +2,7 @@ package io.instacode.university.configuration;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -13,18 +14,19 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("application.properties")
+@EntityScan({"io.instacode.university.model"})
 public class PersistenceConfig {
 
     @Autowired
-    private Environment environment;
+    private UniversityDatabaseProperties properties;
 
     @Bean
     public LocalSessionFactoryBean entityManagerFactory() {
+        
         Resource config = new ClassPathResource("hibernate.cfg.xml");
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setConfigLocation(config);
-        localSessionFactoryBean.setPackagesToScan(environment.getProperty("university.db.entity.package"));
+        localSessionFactoryBean.setPackagesToScan(properties.getEntity());
         localSessionFactoryBean.setDataSource(dataSource());
         return localSessionFactoryBean;
     }
@@ -32,10 +34,10 @@ public class PersistenceConfig {
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(environment.getProperty("university.db.driver"));
-        dataSource.setUrl(environment.getProperty("university.db.url"));
-        dataSource.setUsername(environment.getProperty("university.db.username"));
-        dataSource.setPassword(environment.getProperty("university.db.password"));
+        dataSource.setDriverClassName(properties.getDriver());
+        dataSource.setUrl(properties.getUrl());
+        dataSource.setUsername(properties.getUsername());
+        dataSource.setPassword(properties.getPassword());
         return dataSource;
     }
 }

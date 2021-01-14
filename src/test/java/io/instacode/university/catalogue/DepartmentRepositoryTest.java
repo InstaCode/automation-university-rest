@@ -1,5 +1,7 @@
 package io.instacode.university.catalogue;
 
+import io.instacode.university.dao.DepartmentRepository;
+import io.instacode.university.model.Department;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
