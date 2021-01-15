@@ -2,6 +2,7 @@ group = "io.instacode.university"
 version = "1.0-SNAPSHOT"
 
 plugins {
+    //groovy
     idea
     java
     jacoco
@@ -49,8 +50,11 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-contract-stub-runner-boot:3.0.0")
     implementation("org.springframework.cloud:spring-cloud-starter-contract-verifier:3.0.0")
     implementation("org.springframework.cloud:spring-cloud-starter-stream-rabbit:3.1.0")
-    implementation ("io.pivotal.spring.cloud:spring-cloud-services-dependencies:3.1.6.RELEASE")
-    implementation ("org.springframework.cloud:spring-cloud-dependencies:2020.0.0")
+    implementation("io.pivotal.spring.cloud:spring-cloud-services-dependencies:3.1.6.RELEASE")
+    implementation("org.springframework.cloud:spring-cloud-dependencies:2020.0.0")
+    implementation("org.springframework.cloud:spring-cloud-contract-dependencies:3.0.0")
+    testImplementation("io.rest-assured:xml-path:4.3.3")
+    implementation ("com.google.code.gson:gson:2.8.6")
 }
 
 tasks.test {
@@ -78,11 +82,57 @@ sonarqube {
     }
 }
 
-contracts {
-    setBaseClassForTests("io.instacode.university.contract.BaseTest");
-    contractsPath.set("build/generated-test-sources/contractTest/java/io/instacode/university/contract")
-
+sourceSets {
+    contractTest {
+        java.sourceDirectories.plus(arrayListOf("src/contractTest/java", "build/generated-contract-test-sources/contracts"))
+        resources.sourceDirectories.plus(arrayListOf(file("src/contractTest/resources")))
+        compileClasspath += main.get().output + test.get().output
+        runtimeClasspath += main.get().output + test.get().output
+    }
 }
+
+contracts {
+    setTestMode("MockMvc")
+    setTestFramework("JUNIT5")
+    setNameSuffixForTests("Contract")
+    setBaseClassForTests("io.instacode.university.contract.BaseContractTest");
+    //packageWithBaseClasses.set("io.instacode.university.contract")
+    contractsDslDir.set(file("${project.rootDir}/src/contractTest/resources/contracts"))
+    generatedTestJavaSourcesDir.set(file("${project.buildDir}/generated-contract-test-sources/contracts"))
+    generatedTestResourcesDir.set(file("${buildDir}/generated-contract-resources/contracts"))
+}
+
+
+
+task<Test>("runContractTests") {
+    useJUnitPlatform()
+    description = "Runs contract tests"
+    group = "verification"
+    testClassesDirs = sourceSets.contractTest.get().output.classesDirs
+    classpath = sourceSets.contractTest.get().runtimeClasspath
+}
+
+task("deregisterContractTestSources") {
+    doLast {
+        project.sourceSets.test.get().java {
+            project.logger.info("Removing any *Spec classes from the test sources")
+            exclude("**/*Contract*")
+
+        }
+    }
+}
+
+tasks.compileTestJava {
+    dependsOn("deregisterContractTestSources")
+    doFirst {
+        sourceSets.test.configure {
+            java.sourceDirectories.minus(file("${project.buildDir}/generated-contract-test-sources/contracts"))
+        }
+    }
+}
+
+
+
 
 
 
