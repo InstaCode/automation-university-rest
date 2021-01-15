@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @EnableConfigurationProperties(UniversityConfigProperties.class)
-@ComponentScan(basePackages = {"io.instacode.university.mapper", "io.instacode.university.configuration"})
+@ComponentScan(basePackages = {"io.instacode.university.*"})
 public class WebServicesApplication {
 
     public static void main(String[] args) {

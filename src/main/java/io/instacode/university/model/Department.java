@@ -29,12 +29,4 @@ public class Department extends BaseEntity {
     public void setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
     }
-
-    /*public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }*/
 }

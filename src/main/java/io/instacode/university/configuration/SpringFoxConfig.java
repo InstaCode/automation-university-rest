@@ -8,11 +8,9 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 
 @Configuration
-@EnableSwagger2
 public class SpringFoxConfig {
 
     @Bean
@@ -22,13 +20,11 @@ public class SpringFoxConfig {
                         .title("Automation University")
                         .description("University REST Service")
                         .version("1.0")
-                        .license("Unlicense")
+                        .license("MIT")
                         .build())
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("io.instacode.university"))
                 .paths(PathSelectors.any())
                 .build();
     }
-///RequestHandlerSelectors.basePackage("io.instacode.university.controller")
-
 }
