@@ -19,4 +19,3 @@ response:
     headers:
       - key: Content-Type
         regex: "plain/text*"
-    body
