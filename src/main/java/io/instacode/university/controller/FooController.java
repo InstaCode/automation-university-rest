@@ -1,9 +1,7 @@
 package io.instacode.university.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -13,5 +11,10 @@ public class FooController {
     @GetMapping("/{name}")
     public String sayHi(@PathVariable("name") String name){
         return "Hi! This is my friend, " + name +"!";
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @GetMapping("/")
+    public void error() {
     }
 }

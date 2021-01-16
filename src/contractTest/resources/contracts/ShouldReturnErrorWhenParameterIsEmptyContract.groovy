@@ -9,6 +9,6 @@ Contract.make {
         }
     }
     response {
-        status(500)
+        status(400)
     }
 }
