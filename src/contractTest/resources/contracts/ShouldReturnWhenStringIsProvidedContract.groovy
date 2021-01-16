@@ -5,10 +5,7 @@ Contract.make {
     description("should return when string is provided as a parameter")
     request {
         method GET()
-        url("/api/foo"){
-            queryParameters {
-                parameter("name", "Jason");
-            }
+        url("/api/foo/Jason"){
         }
     }
     response {

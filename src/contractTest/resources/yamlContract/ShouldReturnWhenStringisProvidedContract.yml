@@ -1,0 +1,22 @@
+description: |
+  Represents an error when parameter is empty
+  ```
+  given:
+      given sayHi is active
+  when:
+      when parameter is empty
+  then:
+      we should get an error
+  ```
+request:
+  method: GET
+  url: /api/foo/Jason
+response:
+  status: 200
+  headers:
+    Content-Type: plain/text
+  matchers:
+    headers:
+      - key: Content-Type
+        regex: "plain/text*"
+    body

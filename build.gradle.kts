@@ -45,7 +45,7 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 
     //Cloud Contract
-    testImplementation("io.rest-assured:rest-assured:4.3.3")
+
     implementation("org.springframework.cloud:spring-cloud-test-support:3.0.0")
     implementation("org.springframework.cloud:spring-cloud-contract-stub-runner-boot:3.0.0")
     implementation("org.springframework.cloud:spring-cloud-starter-contract-verifier:3.0.0")
@@ -53,8 +53,13 @@ dependencies {
     implementation("io.pivotal.spring.cloud:spring-cloud-services-dependencies:3.1.6.RELEASE")
     implementation("org.springframework.cloud:spring-cloud-dependencies:2020.0.0")
     implementation("org.springframework.cloud:spring-cloud-contract-dependencies:3.0.0")
-    testImplementation("io.rest-assured:xml-path:4.3.3")
-    implementation ("com.google.code.gson:gson:2.8.6")
+//    implementation("io.rest-assured:rest-assured:4.3.3")
+//    implementation("io.rest-assured:xml-path:4.3.3")
+//    implementation("io.rest-assured:json-path:4.3.3")
+//    implementation("io.rest-assured:rest-assured-common:4.3.3")
+//    implementation("io.rest-assured:rest-assured-all:4.3.3")
+//    implementation("com.google.code.gson:gson:2.8.6")
+//    implementation ("io.rest-assured:spring-mock-mvc:4.3.3")
 }
 
 tasks.test {
@@ -94,7 +99,7 @@ sourceSets {
 contracts {
     setTestMode("MockMvc")
     setTestFramework("JUNIT5")
-    setNameSuffixForTests("Contract")
+    //setNameSuffixForTests("Contract")
     setBaseClassForTests("io.instacode.university.contract.BaseContractTest");
     //packageWithBaseClasses.set("io.instacode.university.contract")
     contractsDslDir.set(file("${project.rootDir}/src/contractTest/resources/contracts"))
