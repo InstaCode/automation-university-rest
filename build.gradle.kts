@@ -8,7 +8,7 @@ plugins {
     jacoco
     id("edu.umich.med.michr.h2-plugin") version "0.1.1-SNAPSHOT"
     id("org.springframework.boot") version "2.4.1"
-    id("io.spring.dependency-management") version "1.0.10.RELEASE"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("io.freefair.lombok") version "5.3.0"
     id("org.sonarqube") version "3.0"
     id("org.springframework.cloud.contract") version "3.0.0"
