@@ -10,7 +10,7 @@ plugins {
     id("org.springframework.boot") version "2.4.1"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     id("io.freefair.lombok") version "5.3.0"
-    id("org.sonarqube") version "3.0"
+    id("org.sonarqube") version "3.2.0"
     id("org.springframework.cloud.contract") version "3.0.0"
 }
 
