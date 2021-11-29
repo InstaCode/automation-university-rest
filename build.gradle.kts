@@ -30,7 +30,7 @@ dependencies {
     implementation("com.github.javafaker:javafaker:1.0.2")
     implementation("org.springframework:spring-orm:5.3.2")
     testImplementation("org.assertj:assertj-db:2.0.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.3.1")
     runtimeOnly("org.springframework.boot:spring-boot-devtools:2.4.1")
     implementation("org.springframework.boot:spring-boot-starter-web:2.4.1")
